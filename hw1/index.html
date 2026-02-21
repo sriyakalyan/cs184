@@ -28,7 +28,7 @@
 	<body>
 		<div class="container">
 		<h1>CS184/284A Spring 2026 Homework 1 Write-Up</h1>
-		<div style="text-align: center;">Names: Sriya Kalyan</div>
+		<div style="text-align: center;">Name: Sriya Kalyan</div>
 
 		<br>
 
@@ -36,12 +36,7 @@
 
 		<br>
 
-		Link to GitHub repository: (TODO) <a href="https://github.com/cal-cs184-student/hw1-rasterizer-pekingduckz">github.com/cal-cs184-student/hw1-rasterizer-pekingduckz</a>
-
-		<figure>
-			<img src="lion.jpg" alt="Lion" style="width:50%"/>
-			<figcaption>You can add images with captions!</figcaption>
-		</figure>
+		Link to GitHub repository: <a href="https://github.com/cal-cs184-student/hw1-rasterizer-pekingduckz">github.com/cal-cs184-student/hw1-rasterizer-pekingduckz</a>
 
 		<!--
 		We've already added one heading per task, to make your write-up as navigable when grading. Please fit your write-up within these sections!
@@ -54,7 +49,7 @@
 
 		<p>To rasterize a triangle, I begin by creating a bounding box by taking the maximum and minimum x and y values of the 3 vertices of the triangle. The bounding box is the smallest rectangle that can fully contain the triangle.</p>
 
-		<p>To account for any points that may lay outside of the frame, I clamp the bounding box further using the height and width of the framebuffer.</p>
+		<p>To account for any points that may fall outside of the frame, I clamp the bounding box further using the height and width of the framebuffer.</p>
 
 		<p>For each pixel within the bounding box, I sample at the center of the pixel using (x + 0.5, y + 0.5).</p>
 
@@ -107,7 +102,63 @@
 		</div>
 
 		<h2>Task 2: Antialiasing by Supersampling</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>To implement supersampling, I began by modifying the way in which colors are stored. Previously, each pizel held a singular color value. To account for the many samples within each pixel, I introduced <code>sample_buffer</code> with a size of <code>width × height × sample_rate</code> to store multiple color samples.</p>
+
+		<p>During the rasterizing process, the edge functions are calculated at each subsample and the color is stored in the corresponding place in the sample buffer.</p>
+
+		<p>Supersampling is useful because it reduces the aliasing effects when we project a continuous geometric shape on a discrete pixel grid. When we don't supersample, each pixel is either within the triangle or outside the triangle. This can result in the jagged or discountined edges that we saw in Task 1. By introducing sub-sampling and averaging the samples, we smooth out these effects and allow for pixels to be partially covered. This produces a visibly smoother boundary and transition.</p>
+
+		<p>When we compare the screenshots of different sampling rates, we see that higher sample rates result in smoother transitions. By increasing the sampling rate, we get closer to the true image because of better approximations of the continuous signals. This does cost more computation.</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample1.png" width="400px"/>
+				  <figcaption>supersample rate 1 per pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample1_window.png" width="400px"/>
+				  <figcaption>supersample rate 1 per pixel with window</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample4.png" width="400px"/>
+				  <figcaption>supersample rate 4 per pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample4_window.png" width="400px"/>
+				  <figcaption>supersample rate 4 per pixel with window</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample9.png" width="400px"/>
+				  <figcaption>supersample rate 9 per pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample9_window.png" width="400px"/>
+				  <figcaption>supersample rate 9 per pixel with window</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample16.png" width="400px"/>
+				  <figcaption>supersample rate 16 per pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task2/sample16_window.png" width="400px"/>
+				  <figcaption>supersample rate 16 per pixel with window</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Task 3: Transforms</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
