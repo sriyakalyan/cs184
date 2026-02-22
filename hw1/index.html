@@ -181,7 +181,26 @@
 		</div>
 
 		<h2>Task 4: Barycentric coordinates</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>Barycentric coordinates utilize a special coordinate system developed for triangles. Rather than using (x, y), we use (&alpha;, &beta;, &gamma;). We used it for color interpolation and smooth color blending in this task.</p>
+
+		<p>Each vertex on a triangle contributes a weightage towards a color. If we color the vertices with red, green, and blue, we can see how each color contributes to each pixel in the triangle. At the center of a triangle (given that it is equialateral), we can expect to see each color contributing equally giving the triangle a grey/white center.</p>
+
+		<p>Mathematically, these weights add up to 1 which allow the corners to be fully colored with their corresponding color. We compute these weights from the edge functions that were used in Task 1. Each weight is proportional to the area of the sub-triangle formed with the opposite edge.</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task4/test7.png" width="400px"/>
+				  <figcaption>Test 7</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task4/custom_triangle.png" width="400px"/>
+				  <figcaption>Triangle with Color Interpolation</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		<h2>Task 5: "Pixel sampling" for texture mapping</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
