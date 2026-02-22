@@ -203,12 +203,42 @@
 		</div>
 
 		<h2>Task 5: "Pixel sampling" for texture mapping</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>Pixel sampling is very similar to what we've been doing in previous tasks with color interpolations. However, now we're retrieving color from a 2D texture to map onto a surface. The algorithm is similar but now we introduce two sampling methods, nearest neighbor sampling and bilinear sampling.</p>
+
+		<p>Nearest Neighbor Sampling picks the texel whose center is closest to the sampled <code>(u, v)</code> coordinate. It is very efficient and fast but can produce blocky and pixelated textures.</p>
+
+		<p>Bilinear Sampling allows for smoother results as it uses a weighted average from the four texels that surround the sampled <code>(u, v)</code> coordinate. Lines become smoother at the expense of more compute.</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task5/nearest_1.png" width="400px"/>
+				  <figcaption>Nearest Neighbor w/ sample rate 1 per pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task5/bilinear_1.png" width="400px"/>
+				  <figcaption>Bilinear w/ sample rate 1 per pixel</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task5/nearest_16.png" width="400px"/>
+				  <figcaption>Nearest Neighbor w/ sample rate 16 per pixel</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task5/bilinear_16.png" width="400px"/>
+				  <figcaption>Bilinear w/ sample rate 16 per pixel</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<p>In the image of the Campanile, we see how Bilinear offers smoother shading when it comes to the shadows in the arches of the tower. Although both techniques produce more similar results as the sample size increases, there are still some visible differences. With the world map, we see how lines connect better without gaps.</p>
+
+		<p>Bilinear sampling reduces aliasing and this is especially noticable on curved and diagonal lines. With high-frequency textures, nearest neighbor sampling produces blocky textures while bilinear sampling smooths and blends.</p>
 
 		<h2>Task 6: "Level Sampling" with mipmaps for texture mapping</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-		<h2>(Optional) Task 7: Extra Credit - Draw Something Creative!</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 		</div>
