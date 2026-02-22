@@ -43,7 +43,11 @@
 		-->
 
 		<h2>Overview</h2>
-		Give a high-level overview of what you implemented in this homework. Think about what you've built as a whole. Share your thoughts on what interesting things you've learned from completing the homework.
+		<p>In this project, I developed a rasterizer through a series of steps. I began by drawing single-color triangles by using bounding boxes and edge functions to fill pixles in. Adding supersampling allowed me to reduce aliasing effects and create smoother shapes. Geometric transformations allowed me to manipulate shapes through translation, scale, and rotation.</p>
+
+		<p>Next, I added barycentric coordinates to implement smooth color interpolation across surfaces. This led to texture mapping where I implemented various sampling methods to retrieve colors from textures.</p>
+
+		<p>At the end of this homework, I gained a deeper understanding of pixels and textures and how they can be discetized. It was interesting to compare different approaches and algorithms and think about key tradeoffs between efficiency and aesthetics.</p>
 
 		<h2>Task 1: Drawing Single-Color Triangles</h2>
 
@@ -239,7 +243,36 @@
 		<p>Bilinear sampling reduces aliasing and this is especially noticable on curved and diagonal lines. With high-frequency textures, nearest neighbor sampling produces blocky textures while bilinear sampling smooths and blends.</p>
 
 		<h2>Task 6: "Level Sampling" with mipmaps for texture mapping</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>Level sampling tells us which mipmap level of a texture to use when we map it to a shape. Rather than always using the highest resolution image as we did in Task 5, we choose the level that corresponds to how the triangle looks in the image. This is important because when a triangle is small, many texels map to a single on-screen pixel. This causes unintended effects like aliasing and moiré patterns as we learned in lecture.</p>
+
+		<p>Level sampling was implemented by computing the texture coordinates <code>(u, v)</code> and estimating the partial derivatives to determine how much the texture changes across pixels on the screen. Afterwards a level was selected depending on the level sampling mode. Combined with our nearest neighbor or bilinear sampling, our texture is mapped to our image.</p>
+
+		<p>In pixel sampling, <code>P_NEAREST</code> chooses the closest level making it faster but produces blocky results. <code>P_LINEAR</code> is slightly slower but reduces jagged edges. <code>L_ZERO</code> always uses the full resolution texture, is fast, but causes aliasing effects. <code>L_NEAREST</code> reduces some of the aliasing effects but is more compute heavy and requires storing the mipmaps. Finally, lower pixels per sample are faster but cause aliasing along edges, while higher sample rates give better edges and smoothing but use more memory to store sample buffers.</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task6/zero_nearest.png" width="400px"/>
+				  <figcaption><code>L_ZERO</code> and <code>P_NEAREST</code></figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task6/zero_linear.png" width="400px"/>
+				  <figcaption><code>L_ZERO</code> and <code>P_LINEAR</code></figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/task6/nearest_nearest.png" width="400px"/>
+				  <figcaption><code>L_NEAREST</code> and <code>P_NEAREST</code></figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/task6/nearest_linear.png" width="400px"/>
+				  <figcaption><code>L_NEAREST</code> and <code>P_LINEAR</code></figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
 
 		</div>
 	</body>
